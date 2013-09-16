@@ -18,6 +18,13 @@ html, body, .wrapper { height:100%; width:100%; margin:0; padding:0; color:#3449
 
 
 /*
+ * Common bootstrap overrides
+ */
+.btn-primary { background-color:#9B59B6; border:0; border-radius:0; }
+
+.btn-primary:hover, .btn-primary:focus { background-color:#8E44AD; }
+
+/*
  * sidebar
  */
 .sidebar {
