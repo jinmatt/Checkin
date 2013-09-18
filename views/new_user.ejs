@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Checkin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/bootstrap.min.css" type="text/css" media="screen">
+    <link rel="stylesheet" href="/stylesheets/style.css" type="text/css" media="screen" title="no title" charset="utf-8">
+    
+  </head>
+  <body>
+	  <div class="wrapper row">
+		  
+		  <div class="sidebar col-lg-2">
+			  <div class="branding">
+				  <h1>
+					  <span class="glyphicon glyphicon-check"></span>
+				  	  Checkin	
+				  </h1>
+			  </div><!-- /.branding -->
+			  
+			  <div class="profile-col">
+				  <!--<img src="holder.js/112x112" alt="profile_pic" class="img-circle">-->
+				  <img src="/images/112x112_profile.jpg" alt="profile_pic" class="img-circle">
+				  <h2>John Smith</h2>
+				  <h3>Admin</h3>
+			  </div><!-- profile-col -->
+			  
+			  <ul class="nav-menu">
+				  <li><a href="/users"><span class="glyphicon glyphicon-user"></span> Users</a></li>
+				  <li><a href="#"><span class="glyphicon glyphicon-check"></span> Checkins</a></li>
+				  <li><a href="#"><span class="glyphicon glyphicon-eye-close"></span> Absences</a></li>
+				  <li><a href="#"><span class="glyphicon glyphicon-cog"></span> Settings</a></li>
+				  <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+			  </ul><!-- /.nav-menu -->
+		  </div><!-- /.sidebar -->
+		  
+		  <div class="content-body col-lg-10">
+			  <div class="page-header">
+			    <h1><span class="glyphicon glyphicon-user"></span> New User</h1>
+			  </div><!-- /.page-header -->
+			  
+			  <form id="fm-new-user" class="col-lg-5" role="form" method="POST">
+		        <div class="form-group">
+		          <label for="name">Name</label>
+		          <input type="text" class="form-control" id="name" name="name" placeholder="User's full name">
+		        </div>
+		        <div class="form-group">
+		          <label for="email">Email</label>
+		          <input type="email" class="form-control" id="email" name="email" placeholder="Mindhelix email id">
+		        </div>
+		        <div class="form-group">
+  		          <label for="designation">Designation</label>
+  		          <input type="text" class="form-control" id="desig" name="desig" placeholder="e.g. CTO, Web Guru, etc.">
+		        </div>
+		        <div class="form-group">
+  		          <label for="password">Password</label>
+  		          <input type="text" class="form-control" id="password" name="password" placeholder="Default password">
+		        </div>
+				
+				<div class="alert alert-success display-none"><strong>Done!</strong> New user added</div>
+				<div class="alert alert-danger display-none"><strong>Oops!</strong> somthing went wrong</div>
+				
+		        <button type="submit" class="btn btn-primary">Create</button>
+		      </form>
+			  
+		  </div><!-- /.content-body -->
+	  </div>
+
+
+
+    <script src="/javascripts/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/javascripts/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/javascripts/holder.min.js" type="text/javascript" charset="utf-8"></script>
+	
+    <script type="text/javascript">
+		$( document ).ready(function() {
+			
+			// new user submit
+			$('#fm-new-user').submit(function() {
+				
+				// disable submit button
+				$('#fm-new-user button[type=submit]').attr('disabled', 'disabled');
+					
+				// POST form data 	
+				$.post('/user/create', { 
+					name: $('#fm-new-user input[name=name]').val(),
+					email: $('#fm-new-user input[name=email]').val(),
+					desig: $('#fm-new-user input[name=desig]').val(),
+					password: $('#fm-new-user input[name=password]').val(),
+					level: 1,
+					status: 1
+				 }, function(data) {
+					if(data.status == 1) {
+						$('.alert.alert-success').fadeIn('slow').delay(2500).fadeOut('slow', function() {
+							window.location = "/users";
+						});
+					} else {
+						$('.alert.alert-danger').fadeIn('slow').delay(2500).fadeOut('slow');
+					}
+					
+					// enable post button
+					$('#fm-new-user button[type=submit]').removeAttr('disabled');
+				}, 'json');
+				
+				// prevent default
+				return false;
+			});
+			
+		}); 
+	</script>
+  </body>
+</html>

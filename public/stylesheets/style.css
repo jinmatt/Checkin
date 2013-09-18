@@ -24,6 +24,10 @@ html, body, .wrapper { height:100%; width:100%; margin:0; padding:0; color:#3449
 
 .btn-primary:hover, .btn-primary:focus { background-color:#8E44AD; }
 
+.btn-primary[disabled] { background-color:#9B59B6; border:0; }
+
+.display-none { display:none; }
+
 /*
  * sidebar
  */

@@ -28,18 +28,16 @@ exports.new = function(req, res) {
 	res.render("new_user");
 };
 
-
 /*
- * Create new user
- * POST method
+ * PUT user
  */
-exports.create = function(req, res) {
-	var user = new User(req.body);
+exports.add = function(req, res) {
+	var user = new User({ name: "Amy Smith", emp_id: 2, email: "amy@mindhelix.com", desig: "Dummy", level: 1, status: 1 });
 	user.save(function(err, user) {
 		if(err) {
-			res.json({ status: 0, message: "Something went wrong" });
+			res.send("Something went wrong");
 		} else {
-			res.json({ status: 1, message: "New user created" });
+			res.send("New user added");
 		}
 	});
 };
