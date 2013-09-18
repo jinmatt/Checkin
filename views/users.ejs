@@ -40,13 +40,14 @@
 			  </div><!-- /.page-header -->
 			  
 			  <!-- Users list -->
-			  <table class="table table-hover">
+			  <table id="usersTable" class="table table-hover">
 		          <thead>
 		            <tr>
 		              <th>#</th>
 		              <th>Name</th>
 		              <th>Email</th>
 		              <th>Designation</th>
+					  <th>&nbsp;</th>
 		            </tr>
 		          </thead>
 		          <tbody>
@@ -57,6 +58,11 @@
 			              <td><%= user.name %></td>
 			              <td><%= user.email %></td>
 			              <td><%= user.desig %></td>
+						  <td>
+							  <a href="#removeUser" class="remove" data-toggle="modal" data-id="<%= user._id %>">
+								  Remove
+							  </a>
+						  </td>
 			            </tr>
 					  <% }); %>
 		          </tbody>
@@ -65,6 +71,25 @@
 			  <a href="/user/new" class="btn btn-primary">
 				  <span class="glyphicon glyphicon-plus"></span> User
 			  </a>	
+			  
+			  <!-- User remove modal -->
+			  <div id="removeUser" class="modal fade">
+			    <div class="modal-dialog">
+			      <div class="modal-content">
+			        <div class="modal-header">
+			          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			          <h4 class="modal-title">Remove user</h4>
+			        </div>
+			        <div class="modal-body">
+			          <p>Are you sure that you want to remove this user?</p>
+			        </div>
+			        <div class="modal-footer">
+			          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			          <button id="btn-remove-user" type="button" class="btn btn-primary" data-id="">Remove</button>
+			        </div>
+			      </div><!-- /.modal-content -->
+			    </div><!-- /.modal-dialog -->
+			  </div><!-- /.modal -->
 			  
 		  </div><!-- /.content-body -->
 	  </div>
@@ -77,6 +102,22 @@
 	
     <script>
 		$( document ).ready(function() {
+			
+			// bind user remove event
+			// assigns user's id to remove btn id
+			$('#usersTable a.remove').bind('click', function() {
+				$('#btn-remove-user').data('id', $(this).data('id'));
+			});
+			
+			// remove user btn click
+			$('#btn-remove-user').click(function() {
+				$.post('/user/remove', { user_id: $(this).data('id') }, function(data) {
+					if(data.status == 1) {
+						// do something
+						// moving to renderjs
+					}
+				}, 'json');
+			});
 			
 		}); 
 	</script>

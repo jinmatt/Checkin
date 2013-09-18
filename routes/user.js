@@ -43,3 +43,19 @@ exports.create = function(req, res) {
 		}
 	});
 };
+
+
+/*
+ * Remove user by id
+ */
+exports.remove = function(req, res) {
+	User.remove(function(err) {
+		if(err) {
+			res.json({ status: 0, message: "Something went wrong" });
+		} else {	
+			User.findById(req.body.user_id, function(err, user) {
+				res.json({ status: 1, message: "User removed from db" });	
+			});
+		}
+	});
+};

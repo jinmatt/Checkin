@@ -20,11 +20,22 @@ html, body, .wrapper { height:100%; width:100%; margin:0; padding:0; color:#3449
 /*
  * Common bootstrap overrides
  */
-.btn-primary { background-color:#9B59B6; border:0; border-radius:0; }
+a, a:visited { color:#9B59B6; }
+a:hover, a:focus { color:#8E44AD; }
 
-.btn-primary:hover, .btn-primary:focus { background-color:#8E44AD; }
+
+a.btn, .btn { color:#34495E; border:1px solid #9B59B6; background-color:#fff; border-radius:0; padding:5px 12px; }
+
+a.btn:hover, .btn:hover, a.btn:focus, .btn:focus { background-color:#fff; border:1px solid #8E44AD; }
+
+.btn[disabled] { border:1px solid #9B59B6; background-color:#fff; }
+
+a.btn-primary, .btn-primary { color:#fff; background-color:#9B59B6; border:0; border-radius:0; padding:6px 12px; }
+
+a.btn-primary:hover, .btn-primary:hover, a.btn-primary:focus, .btn-primary:focus { background-color:#8E44AD; border:0; }
 
 .btn-primary[disabled] { background-color:#9B59B6; border:0; }
+
 
 .display-none { display:none; }
 
