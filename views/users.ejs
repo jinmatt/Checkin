@@ -53,7 +53,7 @@
 		          <tbody>
 				  	  <% var count = 0;
 					  users.forEach(function(user) { %>
-			            <tr>
+			            <tr id="<%= user._id + '_row' %>">
 			              <td><%= ++count %></td>
 			              <td><%= user.name %></td>
 			              <td><%= user.email %></td>
@@ -111,10 +111,13 @@
 			
 			// remove user btn click
 			$('#btn-remove-user').click(function() {
-				$.post('/user/remove', { user_id: $(this).data('id') }, function(data) {
+				var user_id = $(this).data('id');
+				$.post('/user/remove', { user_id: user_id }, function(data) {
 					if(data.status == 1) {
-						// do something
-						// moving to renderjs
+						console.log(user_id);
+						// hide modal and fade out the deleted row
+						$('#removeUser').modal('hide');
+						$('#' + user_id + '_row').remove().hide('slow');
 					}
 				}, 'json');
 			});
